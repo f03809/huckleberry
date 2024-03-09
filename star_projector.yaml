@@ -5,6 +5,7 @@ esphome:
   on_boot:
     then:
       - switch.turn_on: switch_main
+      - fan.turn_on: motor
 
 bk72xx:
   board: wb3s

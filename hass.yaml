@@ -6,11 +6,6 @@ substitutions:
   gateway: 10.20.20.1
   subnet: 255.255.255.0
 
-# by default controlling is done via the button and via the web interface
-# if you use homeassistant you can uncomment below code:
-#api:
-#  password: !secret api_password
-
 packages:
   remote_package:
     url: https://github.com/f03809/huckleberry.git
