@@ -9,11 +9,13 @@ substitutions:
   #   kauf.rgbsw: github://f03809/kauf-rgb-switch/kauf-rgbs.yaml
   #
 
-  name: kauf-rgbsw             # **** CHANGE DEVICE NAME TO SOMETHING UNIQUE PER DEVICE.  RENAME YAML FILE TO SAME NAME.    ****
-                               # **** USE DASHES (-) INSTEAD OF SPACES OR UNDERSCORE (_).  USE ONLY LOWER CASE LETTERS.     ****
-  friendly_name: Kauf RGB Sw   # **** CHANGE FRIENDLY NAME TO SOMETHING UNIQUE PER DEVICE                                   ****
+  # https://esphome.io/components/esphome.html#esphome-creators-project
+  project_name: Kauf.RGBSw
+  project_ver_num: "1.35"
+  project_ver_let: y
 
   sub_4m: "false"
+  sub_import_url: github://f03809/kauf-rgb-switch/kauf-rgbs.yaml
 
   disable_entities: "true"     # set to "false" to have all entities show up in Home Assistant automatically
   disable_webserver: "false"   # set to "true" to disable webserver listening on port 80.
@@ -93,7 +95,9 @@ globals:
 # https://esphome.io/components/esphome.html
 esphome:
   name: $name
-  friendly_name: $friendly_name
+  project:
+    name: $project_name
+    version: $project_ver_num($project_ver_let)
   on_boot:
     then:
         # set default values for template sensors, otherwise they are unknown.
@@ -124,20 +128,11 @@ external_components:
 
 
 # https://esphome.io/components/wifi.html
-
 wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
 
-  ap:
-    ssid: ${name}
-    password: !secret wifi_password
-    ap_timeout: $wifi_ap_timeout
-  
-  manual_ip:
-    static_ip: ${static_ip}
-    gateway: ${gateway}
-    subnet: ${subnet}
+  # **** ENTER WI-FI CREDENTIALS HERE, USING SECRETS.YAML RECOMMENDED ****
+  ssid: initial_ap            # !secret wifi_ssid
+  password: asdfasdfasdfasdf  # !secret wifi_password
 
   # default is 20, 17 is recommended.
   output_power: 17
@@ -147,6 +142,9 @@ wifi:
 
   forced_addr: 82
   global_addr: global_forced_addr
+
+  ap:
+    ap_timeout: $wifi_ap_timeout
 
 
 # https://esphome.io/components/captive_portal.html
@@ -159,16 +157,11 @@ logger:
 
 # https://esphome.io/components/api.html
 api:
-  encryption:
-    key: !secret api_key
-
-
-
+  id: kauf_api
 
 
 # https://esphome.io/components/ota.html
 ota:
-  password: !secret ota_password
   on_error:
     then:
       - button.press: restart_button
