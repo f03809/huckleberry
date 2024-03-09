@@ -163,6 +163,7 @@ logger:
 
 # https://esphome.io/components/api.html
 api:
+  id: kauf_api
   encryption:
     key: !secret api_key
 
