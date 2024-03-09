@@ -1,5 +1,3 @@
-logger:
-
 web_server:
 
 captive_portal:
@@ -30,16 +28,7 @@ button:
   - platform: restart
     name: Restart
 
-debug:
-  update_interval: 30s
-
 text_sensor:
-  - platform: debug
-    reset_reason:
-      name: Reset Reason
-  - platform: libretiny
-    version:
-      name: LibreTiny Version
   - platform: wifi_info
     ip_address:
       name: IP Address
