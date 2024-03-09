@@ -1,3 +1,11 @@
+logger:
+
+web_server:
+
+captive_portal:
+
+mdns:
+
 api:
   encryption:
     key: !secret api_key
