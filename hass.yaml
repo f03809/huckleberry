@@ -14,6 +14,6 @@ substitutions:
 packages:
   remote_package:
     url: https://github.com/f03809/huckleberry.git
-    ref: master
+    ref: main
     refresh: 1s
     files: [base.yaml, atomi_sconce.yaml]

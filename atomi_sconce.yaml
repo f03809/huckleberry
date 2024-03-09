@@ -9,6 +9,9 @@ esphome:
           brightness: 100%
           color_temperature: 6500K
 
+bk72xx:
+  board: generic-bk7231n-qfn32-tuya
+
 output:
   - platform: libretiny_pwm
     id: output_red
