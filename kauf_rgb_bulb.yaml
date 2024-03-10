@@ -59,7 +59,7 @@ external_components:
     refresh: never
   - source:
       type: git
-      url: https://github.com/KaufHA/kauf-rgbww-bulbs
+      url: https://github.com/f03809/kauf-rgbww-bulbs
     refresh: always
 
 
@@ -353,7 +353,7 @@ number:      # set max power output for PWMs
     id: number_default_fade
     entity_category: config
     icon: mdi:timer-outline
-    optimistic: trueq
+    optimistic: true
     restore_value: true
     unit_of_measurement: "ms"
     mode: box
