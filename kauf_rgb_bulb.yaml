@@ -116,11 +116,7 @@ wifi:
   forced_addr: 0
   global_addr: global_forced_addr
 
-  ap:
-    ap_timeout: $wifi_ap_timeout
-
-
-# https://esphome.io/components/captive_portal.html
+ # https://esphome.io/components/captive_portal.html
 captive_portal:
 
 
@@ -352,7 +348,7 @@ number:      # set max power output for PWMs
     id: number_default_fade
     entity_category: config
     icon: mdi:timer-outline
-    optimistic: true
+    optimistic: trueq
     restore_value: true
     unit_of_measurement: "ms"
     mode: box
