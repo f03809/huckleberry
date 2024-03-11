@@ -78,7 +78,6 @@ globals:
 
 # https://esphome.io/components/esphome.html
 esphome:
-
   name: $name
   friendly_name: $friendly_name
   project:
