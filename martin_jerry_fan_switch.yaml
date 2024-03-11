@@ -1,0 +1,20 @@
+esphome:
+  name: ${name}
+  name_add_mac_suffix: false
+  friendly_name: ${friendly_name}
+  platform: ESP8266
+  board: esp01_1m
+
+uart:
+  rx_pin: GPIO3
+  tx_pin: GPIO1
+  baud_rate: 9600
+
+tuya:
+
+fan:
+  - platform: "tuya"
+    name: ${friendly_name} Speed
+    switch_datapoint: 1
+    speed_datapoint: 3
+    speed_count: 4
