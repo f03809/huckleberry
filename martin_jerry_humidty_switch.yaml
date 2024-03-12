@@ -47,8 +47,6 @@ sensor:
     variant: AHT10
     id: aht10_sensor
     update_interval: 30s
-    temperature:
-      name: "Temperature"
     humidity:
       name: "Humidity"
       on_value:
