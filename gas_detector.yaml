@@ -24,14 +24,14 @@ text_sensor:
       name: LibreTiny Version
   - platform: template
     id: tuya_presence_state
-    name: (Unconfirmed) Presence State
+    name: Gas Detection
     filters:
       - map:
           - 0 -> None
-          - 1 -> Presence
+          - 1 -> Detected
   - platform: template
     id: tuya_mov_status
-    name: (Unconfirmed) Mov Status
+    name: Mov Status
     filters:
       - map:
           - 0 -> None
@@ -44,7 +44,7 @@ sensor:
     name: Uptime
   - platform: tuya
     sensor_datapoint: 101
-    name: (Unconfirmed) Illuminance Value
+    name: Illuminance Value
     unit_of_measurement: lux
 
 uart:
@@ -71,91 +71,91 @@ tuya:
 number:
   - platform: tuya
     number_datapoint: 2
-    name: (Unconfirmed) Sensitivity
+    name: Sensitivity
     unit_of_measurement: x
     min_value: 0
     max_value: 10
     step: 1
   - platform: tuya
     number_datapoint: 3
-    name: (Unconfirmed) Near Detection
+    name: Near Detection
     unit_of_measurement: cm
     min_value: 0
     max_value: 1000
     step: 10
   - platform: tuya
     number_datapoint: 4
-    name: (Unconfirmed) Far Detection
+    name: Far Detection
     unit_of_measurement: cm
     min_value: 0
     max_value: 600
     step: 10
   - platform: tuya
     number_datapoint: 102
-    name: (Unconfirmed) Sensitivity Cz
+    name: Sensitivity Cz
     unit_of_measurement: x
     min_value: 0
     max_value: 10
     step: 1
   - platform: tuya
     number_datapoint: 105
-    name: (Unconfirmed) Wd Detection
+    name: Wd Detection
     unit_of_measurement: cm
     min_value: 0
     max_value: 600
     step: 10
   - platform: tuya
     number_datapoint: 106
-    name: (Unconfirmed) Sensitivity Wd
+    name: Sensitivity Wd
     unit_of_measurement: x
     min_value: 0
     max_value: 10
     step: 1
   - platform: tuya
     number_datapoint: 108
-    name: (Unconfirmed) Pir Delay
+    name: Pir Delay
     unit_of_measurement: s
     min_value: 0
     max_value: 28800
     step: 1
   - platform: tuya
     number_datapoint: 109
-    name: (Unconfirmed) Alarm Time
+    name: Alarm Time
     unit_of_measurement: min
     min_value: 1
     max_value: 60
     step: 1
   - platform: tuya
     number_datapoint: 110
-    name: (Unconfirmed) Mov Min Detection
+    name: Mov Min Detection
     unit_of_measurement: cm
     min_value: 0
     max_value: 1000
     step: 1
   - platform: tuya
     number_datapoint: 111
-    name: (Unconfirmed) Micro Min Detection
+    name: Micro Min Detection
     unit_of_measurement: cm
     min_value: 0
     max_value: 1000
     step: 1
   - platform: tuya
     number_datapoint: 112
-    name: (Unconfirmed) Bre Min Detection
+    name: Bre Min Detection
     unit_of_measurement: cm
     min_value: 0
     max_value: 1000
     step: 1
   - platform: tuya
     number_datapoint: 113
-    name: (Unconfirmed) Study Timer
+    name: Study Timer
     unit_of_measurement: second
     min_value: 0
     max_value: 300
     step: 1
   - platform: tuya
     number_datapoint: 119
-    name: (Unconfirmed) False Alarm
+    name: False Alarm
     unit_of_measurement: x
     min_value: 0
     max_value: 20
@@ -164,27 +164,27 @@ number:
 switch:
   - platform: tuya
     switch_datapoint: 103
-    name: (Unconfirmed) Led Onoff
+    name: Led Onoff
   - platform: tuya
     switch_datapoint: 114
-    name: (Unconfirmed) Start Study
+    name: Start Study
   - platform: tuya
     switch_datapoint: 115
-    name: (Unconfirmed) Reset Setting
+    name: Reset Setting
   - platform: tuya
     switch_datapoint: 117
-    name: (Unconfirmed) Small Mov Start
+    name: Small Mov Start
   - platform: tuya
     switch_datapoint: 118
-    name: (Unconfirmed) Breathe Start
+    name: Breathe Start
   - platform: tuya
     switch_datapoint: 120
-    name: (Unconfirmed) False Breath
+    name: False Breath
 
 select:
   - platform: tuya
     enum_datapoint: 104
-    name: (Unconfirmed) Mode
+    name: Mode
     optimistic: true
     options:
       0: Arm
@@ -193,7 +193,7 @@ select:
       3: Doorbell
   - platform: tuya
     enum_datapoint: 107
-    name: (Unconfirmed) Alarm Volume
+    name: Alarm Volume
     optimistic: true
     options:
       0: Low
