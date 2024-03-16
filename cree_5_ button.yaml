@@ -18,7 +18,7 @@ text_sensor:
   name: "State"
   id: template_text
 - platform: template
-  name: "Button 1"
+  name: "Button 1x"
   id: button1
   icon: "mdi:toggle-switch"
   on_value:
