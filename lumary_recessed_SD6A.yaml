@@ -13,18 +13,28 @@ output:
   - platform: libretiny_pwm
     id: output_red
     pin: P26
+    min_power: 0.01
+    max_power : 0.90
   - platform: libretiny_pwm
     id: output_green
     pin: P24
+    min_power: 0.01
+    max_power : 0.90
   - platform: libretiny_pwm
     id: output_blue
     pin: P6
+    min_power: 0.01
+    max_power : 0.90
   - platform: libretiny_pwm
     id: output_cold
     pin: P8
+    min_power: 0.01
+    max_power : 0.90
   - platform: libretiny_pwm
     id: output_warm
     pin: P7
+    min_power: 0.01
+    max_power : 0.90
 
 light:
   - platform: rgbww
