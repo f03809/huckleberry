@@ -23,8 +23,8 @@ wifi:
 
   manual_ip:
     static_ip: ${static_ip}
-    gateway: ${gateway}
-    subnet: ${subnet}
+    gateway: !secret gateway
+    subnet: !secret subnet
 
 button:
   - platform: restart
