@@ -1,0 +1,202 @@
+esphome:
+  name: ${name}
+  name_add_mac_suffix: false
+  friendly_name: ${friendly_name}
+
+bk72xx:
+  board: generic-bk7231n-qfn32-tuya
+
+mdns:
+
+button:
+  - platform: restart
+    name: Restart
+
+debug:
+  update_interval: 30s
+
+text_sensor:
+  - platform: debug
+    reset_reason:
+      name: Reset Reason
+  - platform: libretiny
+    version:
+      name: LibreTiny Version
+  - platform: template
+    id: tuya_presence_state
+    name: Gas Detection
+    filters:
+      - map:
+          - 0 -> None
+          - 1 -> Detected
+  - platform: template
+    id: tuya_mov_status
+    name: Mov Status
+    filters:
+      - map:
+          - 0 -> None
+          - 1 -> Large_Move
+          - 2 -> Small_Move
+          - 3 -> Breathe
+
+sensor:
+  - platform: uptime
+    name: Uptime
+  - platform: tuya
+    sensor_datapoint: 101
+    name: Illuminance Value
+    unit_of_measurement: lux
+
+uart:
+  rx_pin: RX1
+  tx_pin: TX1
+  baud_rate: 9600
+
+tuya:
+  # DPIDs processed from schema model: esimak
+  on_datapoint_update:
+    - sensor_datapoint: 1
+      datapoint_type: enum
+      then:
+        - text_sensor.template.publish:
+            id: tuya_presence_state
+            state: !lambda "return std::to_string(x);"
+    - sensor_datapoint: 116
+      datapoint_type: enum
+      then:
+        - text_sensor.template.publish:
+            id: tuya_mov_status
+            state: !lambda "return std::to_string(x);"
+
+number:
+  - platform: tuya
+    number_datapoint: 2
+    name: Sensitivity
+    unit_of_measurement: x
+    min_value: 0
+    max_value: 10
+    step: 1
+  - platform: tuya
+    number_datapoint: 3
+    name: Near Detection
+    unit_of_measurement: cm
+    min_value: 0
+    max_value: 1000
+    step: 10
+  - platform: tuya
+    number_datapoint: 4
+    name: Far Detection
+    unit_of_measurement: cm
+    min_value: 0
+    max_value: 600
+    step: 10
+  - platform: tuya
+    number_datapoint: 102
+    name: Sensitivity Cz
+    unit_of_measurement: x
+    min_value: 0
+    max_value: 10
+    step: 1
+  - platform: tuya
+    number_datapoint: 105
+    name: Wd Detection
+    unit_of_measurement: cm
+    min_value: 0
+    max_value: 600
+    step: 10
+  - platform: tuya
+    number_datapoint: 106
+    name: Sensitivity Wd
+    unit_of_measurement: x
+    min_value: 0
+    max_value: 10
+    step: 1
+  - platform: tuya
+    number_datapoint: 108
+    name: Pir Delay
+    unit_of_measurement: s
+    min_value: 0
+    max_value: 28800
+    step: 1
+  - platform: tuya
+    number_datapoint: 109
+    name: Alarm Time
+    unit_of_measurement: min
+    min_value: 1
+    max_value: 60
+    step: 1
+  - platform: tuya
+    number_datapoint: 110
+    name: Mov Min Detection
+    unit_of_measurement: cm
+    min_value: 0
+    max_value: 1000
+    step: 1
+  - platform: tuya
+    number_datapoint: 111
+    name: Micro Min Detection
+    unit_of_measurement: cm
+    min_value: 0
+    max_value: 1000
+    step: 1
+  - platform: tuya
+    number_datapoint: 112
+    name: Bre Min Detection
+    unit_of_measurement: cm
+    min_value: 0
+    max_value: 1000
+    step: 1
+  - platform: tuya
+    number_datapoint: 113
+    name: Study Timer
+    unit_of_measurement: second
+    min_value: 0
+    max_value: 300
+    step: 1
+  - platform: tuya
+    number_datapoint: 119
+    name: False Alarm
+    unit_of_measurement: x
+    min_value: 0
+    max_value: 20
+    step: 1
+
+switch:
+  - platform: tuya
+    switch_datapoint: 103
+    name: Led Onoff
+  - platform: tuya
+    switch_datapoint: 114
+    name: Start Study
+  - platform: tuya
+    switch_datapoint: 115
+    name: Reset Setting
+  - platform: tuya
+    switch_datapoint: 117
+    name: Small Mov Start
+  - platform: tuya
+    switch_datapoint: 118
+    name: Breathe Start
+  - platform: tuya
+    switch_datapoint: 120
+    name: False Breath
+
+select:
+  - platform: tuya
+    enum_datapoint: 104
+    name: Mode
+    optimistic: true
+    options:
+      0: Arm
+      1: Disarm
+      2: Sos
+      3: Doorbell
+  - platform: tuya
+    enum_datapoint: 107
+    name: Alarm Volume
+    optimistic: true
+    options:
+      0: Low
+      1: Middle
+      2: High
+      3: Mute
