@@ -140,9 +140,8 @@ wifi:
   
   manual_ip:
     static_ip: ${static_ip}
-    gateway: !secret gateway
-    subnet: !secret subnet
-
+    gateway: 10.20.20.1
+    subnet: 255.255.254.0
   # default is 20, 17 is recommended.
   output_power: 17
 
