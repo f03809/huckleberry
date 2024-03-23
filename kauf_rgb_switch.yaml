@@ -782,11 +782,11 @@ button:
 # Send IP Address to HA
 # https://esphome.io/components/text_sensor/wifi_info.html
 text_sensor:
-  - platform: wifi_info
-    ip_address:
-      name: IP Address
-      entity_category: diagnostic
-      disabled_by_default: $disable_entities
+  # - platform: wifi_info
+    # ip_address:
+    #   name: IP Address
+    #   entity_category: diagnostic
+    #   disabled_by_default: $disable_entities
   - platform: homeassistant
     id: hass_small_light_state
     entity_id: $hass_entity_control_small_light
