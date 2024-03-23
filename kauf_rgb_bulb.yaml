@@ -111,8 +111,8 @@ wifi:
   
   manual_ip:
     static_ip: ${static_ip}
-    gateway: ${gateway}
-    subnet: ${subnet}
+    gateway: !secret gateway
+    subnet: !secret subnet
 
   # using fast_connect as default since it is required for hidden networks.
   fast_connect: true
