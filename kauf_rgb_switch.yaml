@@ -125,7 +125,7 @@ globals:
 
 # https://esphome.io/components/esphome.html
 esphome:
-  area:  Office
+  area:  $area
   name: $name
   friendly_name: $friendly_name
 
