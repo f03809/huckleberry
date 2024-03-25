@@ -130,7 +130,7 @@ wifi:
   # using fast_connect as default since it is required for hidden networks.
   fast_connect: true
 
-  forced_addr: 82
+  forced_addr: 0
   global_addr: global_forced_addr
 
 
