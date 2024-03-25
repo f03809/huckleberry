@@ -35,11 +35,12 @@ text_sensor:
     ip_address:
       name: IP Address
     ssid:
-      name: Connected SSID
+      name: Wifi SSID
     mac_address:
-      name: Wifi Address
+      name: MAC
   - platform: version
     name: "ESPHome Version"
+    hide_timestamp: true
 
 sensor:
   - platform: uptime
