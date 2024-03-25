@@ -6,8 +6,13 @@ substitutions:
   # yaml file by redefining them.
   #
   # packages:
-  #   kauf.rgbww: github://f03809/kauf-rgbww-bulbs/kauf-bulb.yaml
+  #   kauf.rgbww: github://KaufHA/kauf-rgbww-bulbs/kauf-bulb.yaml
   #
+
+  name: kauf-bulb              # **** CHANGE DEVICE NAME TO SOMETHING UNIQUE PER DEVICE.  RENAME YAML FILE TO SAME NAME.    ****
+                               # **** USE DASHES (-) INSTEAD OF SPACES OR UNDERSCORE (_).  USE ONLY LOWER CASE LETTERS.     ****
+
+  friendly_name: Kauf Bulb     # **** CHANGE FRIENDLY NAME TO SOMETHING UNIQUE PER DEVICE ****
 
   disable_entities:  "true"    # set to "false" to have all entities show up in Home Assistant automatically
   disable_webserver: "false"   # set to "true" to disable webserver listening on port 80.
@@ -20,7 +25,7 @@ substitutions:
 
   # https://esphome.io/components/esphome.html#esphome-creators-project
   project_name: Kauf.RGBWW
-  project_ver_num: "1.924"
+  project_ver_num: "1.925"
   project_ver_let: y
 
   sub_on_turn_on:  script_do_nothing
@@ -55,13 +60,12 @@ external_components:
   - source:
       type: git
       url: https://github.com/KaufHA/common
-      ref: v2024.02.20
+      ref: v2024.03.20
     refresh: never
   - source:
       type: git
-      url: https://github.com/f03809/kauf-rgbww-bulbs
+      url: https://github.com/KaufHA/kauf-rgbww-bulbs
     refresh: always
-
 
 
 # https://esphome.io/guides/automations.html#global-variables
@@ -78,8 +82,10 @@ globals:
 
 # https://esphome.io/components/esphome.html
 esphome:
+  area:  $area
   name: $name
   friendly_name: $friendly_name
+
   project:
     name: $project_name
     version: $project_ver_num($project_ver_let)
@@ -99,7 +105,12 @@ button:
     disabled_by_default: $disable_entities
 
 
-# https://esphome.io/components/wifi.html
+ota:
+  password: !secret ota_password
+  on_error:
+    then:
+      - button.press: restart_button
+
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
@@ -107,20 +118,23 @@ wifi:
   ap:
     ssid: ${name}
     password: !secret wifi_password
-    ap_timeout: $wifi_ap_timeout
-  
+
   manual_ip:
     static_ip: ${static_ip}
     gateway: !secret gateway
     subnet: !secret subnet
 
+  # default is 20, 17 is recommended.
+  output_power: 17
+
   # using fast_connect as default since it is required for hidden networks.
   fast_connect: true
 
-  forced_addr: 0
+  forced_addr: 82
   global_addr: global_forced_addr
 
- # https://esphome.io/components/captive_portal.html
+
+# https://esphome.io/components/captive_portal.html
 captive_portal:
 
 
@@ -131,15 +145,6 @@ logger:
 # https://esphome.io/components/api.html
 api:
   id: kauf_api
-  encryption:
-    key: !secret api_key
-
-# https://esphome.io/components/ota.html
-ota:
-  password: !secret ota_password
-  on_error:
-    then:
-      - button.press: restart_button
 
 
 # https://esphome.io/components/web_server.html
@@ -316,7 +321,7 @@ select:
 # https://esphome.io/components/number/template.html
 number:      # set max power output for PWMs
   - platform: template
-    name: Max Power
+    name: ${friendly_name} Max Power
     min_value: 1
     max_value: 100
     step: 1
@@ -344,7 +349,7 @@ number:      # set max power output for PWMs
       - script.execute: script_save_changes
 
   - platform: template
-    name: Default Fade
+    name: ${friendly_name} Default Fade
     min_value: 0
     max_value: 5000
     step: 50
