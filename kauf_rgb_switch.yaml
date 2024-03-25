@@ -1,32 +1,20 @@
-# https://esphome.io/guides/configuration-types.html#substitutions
 substitutions:
+  name: office-closet-switch
+  friendly_name: Office Closet Switch
+  static_ip: 10.20.21.21
 
-  # substitutions can be changed here if you are using this file directly in the ESPHome dashboard.  The better approach is
-  # to incorporate this file as a package using the following packages: configuration, and then overwrite these substitutions
-  # in your local yaml file by redefining them.
-  #
-  # packages:
-  #   kauf.rgbsw: github://f03809/kauf-rgb-switch/kauf-rgbs.yaml
-  #
-
-  # https://esphome.io/components/esphome.html#esphome-creators-project
   project_name: Kauf.RGBSw
-  project_ver_num: "1.35"
+  project_ver_num: "1.351"
   project_ver_let: y
 
   sub_4m: "false"
-  sub_import_url: github://f03809/kauf-rgb-switch/kauf-rgbs.yaml
+  sub_import_url: github://KaufHA/kauf-rgb-switch/kauf-rgbs.yaml
 
   disable_entities: "true"     # set to "false" to have all entities show up in Home Assistant automatically
   disable_webserver: "false"   # set to "true" to disable webserver listening on port 80.
 
   wifi_ap_timeout: 2min        # default to 2 minute timeout for yaml file as package.
 
-  # substitutions for scripts to execute based on button actions.
-  # the built-in automations for the button will still do everything they normally do even
-  # when these substitutions are redefined.  Redefining these will not stop the ui switch from toggling.
-  # The button configuration select entity must be set to disabled to stop the button from toggling the ui switch.
-  # The button press duration sensor will also still update even with these redefined.
   sub_on_press:                script_do_nothing # executes right when button is pressed
   sub_on_release:              script_do_nothing # executes right when button is released
   sub_on_double_press:         script_do_nothing # executes when the button is double pressed
@@ -35,40 +23,85 @@ substitutions:
   sub_on_release_without_hold: script_do_nothing # executes when the button is released after a press that is under the hold threshold.
   sub_wifi_reset_script:       script_wifi_reset # reset wifi credentials, overwrite to disable
 
-  # an extra script that, if running, will stop the switch from toggling on button release.
   sub_toggle_check: script_do_nothing
 
-  # these will execute when ui_switch turns on and off, respectively.  like on_press and on_release above, built-in
-  # automations still all run.  Lights changing can be disabled through the config light entity effects.  Relay
-  # can be disabled by selecting always on or always off in the configuration select entity.  You can control the
-  # relay independently by toggling the select entity between always on and always off.
   sub_on_turn_on:  script_do_nothing
   sub_on_turn_off: script_do_nothing
 
-  # allows status led to be blocked.  Currently only used on factory image to eliminate blinking during factory test.
   sub_blink_check: script_do_nothing
 
-  # modify transition length of lights
   sub_transition_length: 333ms
 
-  # button press substitutions
   sub_double_press_max_gap: 333ms
   sub_hold_time: 750ms
   sub_button_sensor_duration: 500ms
 
-  # substitutions to control hass entities with press combos
   hass_entity_single_press_toggle:           no.ne
   hass_entity_double_press_toggle:           no.ne
   hass_entity_hold_toggle:                   no.ne
   hass_entity_release_without_hold_toggle:   no.ne
 
-  # substitutions to sync lights with hass entities instead of UI switch
   hass_entity_control_small_light:           no.ne
   hass_entity_control_small_light_on_state:  'on'
   hass_entity_control_small_light_off_state: 'off'
   hass_entity_control_big_light:             no.ne
   hass_entity_control_big_light_on_state:    'on'
   hass_entity_control_big_light_off_state:   'off'
+
+api:
+  id: kauf_api
+
+ota:
+  password: !secret ota_password
+  on_error:
+    then:
+      - button.press: restart_button
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  ap:
+    ssid: ${name}
+    password: !secret wifi_password
+
+  manual_ip:
+    static_ip: ${static_ip}
+    gateway: !secret gateway
+    subnet: !secret subnet
+
+  # default is 20, 17 is recommended.
+  output_power: 17
+
+  # using fast_connect as default since it is required for hidden networks.
+  fast_connect: true
+
+  forced_addr: 82
+  global_addr: global_forced_addr
+
+# button:
+#   - platform: restart
+#     name: Restart
+
+# text_sensor:
+#   - platform: wifi_info
+#     ip_address:
+#       name: IP Address
+#     ssid:
+#       name: Connected SSID
+#     mac_address:
+#       name: Wifi Address
+
+# sensor:
+#   - platform: uptime
+#     name: Uptime
+
+#   - platform: wifi_signal
+#     name: Wifi Signal
+#     update_interval: 60s
+    
+# https://esphome.io/guides/configuration-types.html#substitutions
+
 
 
 # https://esphome.io/components/esp8266.html
@@ -94,8 +127,10 @@ globals:
 
 # https://esphome.io/components/esphome.html
 esphome:
+  area:  Office
   name: $name
   friendly_name: $friendly_name
+
   project:
     name: $project_name
     version: $project_ver_num($project_ver_let)
@@ -129,27 +164,7 @@ external_components:
 
 
 # https://esphome.io/components/wifi.html
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
 
-  ap:
-    ssid: ${name}
-    password: !secret wifi_password
-    ap_timeout: $wifi_ap_timeout
-  
-  manual_ip:
-    static_ip: ${static_ip}
-    gateway: 10.20.20.1
-    subnet: 255.255.254.0
-  # default is 20, 17 is recommended.
-  output_power: 17
-
-  # using fast_connect as default since it is required for hidden networks.
-  fast_connect: true
-
-  forced_addr: 82
-  global_addr: global_forced_addr
 
 
 # https://esphome.io/components/captive_portal.html
@@ -161,18 +176,15 @@ logger:
 
 
 # https://esphome.io/components/api.html
-api:
-  id: kauf_api
-  encryption:
-    key: !secret api_key
+# api:
+#   id: kauf_api
 
 
 # https://esphome.io/components/ota.html
-ota:
-  password: !secret ota_password
-  on_error:
-    then:
-      - button.press: restart_button
+# ota:
+#   on_error:
+#     then:
+#       - button.press: restart_button
 
 
 # https://esphome.io/components/web_server.html
@@ -781,11 +793,15 @@ button:
 # Send IP Address to HA
 # https://esphome.io/components/text_sensor/wifi_info.html
 text_sensor:
-  # - platform: wifi_info
-    # ip_address:
-    #   name: IP Address
-    #   entity_category: diagnostic
-    #   disabled_by_default: $disable_entities
+  - platform: wifi_info
+    ip_address:
+      name: IP Address
+      entity_category: diagnostic
+      disabled_by_default: $disable_entities
+    ssid:
+      name: Connected SSID
+    mac_address:
+      name: Wifi Address
   - platform: homeassistant
     id: hass_small_light_state
     entity_id: $hass_entity_control_small_light
@@ -798,7 +814,6 @@ text_sensor:
     on_value:
       - delay: 1ms
       - script.execute: copy_vals
-
 
 # https://esphome.io/components/sensor/index.html
 sensor:
@@ -849,4 +864,4 @@ interval:
 #  46- 57:   Big Light
 #  58- 69:   Big Off Value Light
 #  70- 81:   Big On Value Light
-#  82-107:   Wi-Fi Credentials
+#  82-107:   Wi-Fi Credentialsqq
