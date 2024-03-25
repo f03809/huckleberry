@@ -38,6 +38,8 @@ text_sensor:
       name: Connected SSID
     mac_address:
       name: Wifi Address
+  - platform: version
+    name: "ESPHome Version"
 
 sensor:
   - platform: uptime
