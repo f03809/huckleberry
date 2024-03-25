@@ -1,7 +1,5 @@
 substitutions:
-  name: office-closet-switch
-  friendly_name: Office Closet Switch
-  static_ip: 10.20.21.21
+
 
   project_name: Kauf.RGBSw
   project_ver_num: "1.351"
