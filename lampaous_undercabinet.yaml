@@ -1,4 +1,4 @@
-subscriptions:
+substitutions:
   default_transition_length: 2s
 
 esphome:
