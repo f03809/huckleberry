@@ -1,3 +1,6 @@
+substitutions:
+  default_transition_length: 2s
+  
 esphome:
   name: ${name}
   name_add_mac_suffix: false
