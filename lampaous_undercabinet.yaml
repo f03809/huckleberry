@@ -1,3 +1,6 @@
+subscriptions:
+  default_transition_length: 2s
+
 esphome:
   name: ${name}
   name_add_mac_suffix: false
@@ -42,7 +45,7 @@ light:
     cold_white: output_cold
     warm_white: output_warm
     restore_mode: RESTORE_AND_ON
-    default_transition_length: 5s 
+    default_transition_length: $default_transition_length 
 
 remote_receiver:
   pin:
