@@ -798,7 +798,7 @@ text_sensor:
     ssid:
       name: Connected SSID
     mac_address:
-      name: Wifi Address
+      name: MAC
   - platform: homeassistant
     id: hass_small_light_state
     entity_id: $hass_entity_control_small_light
