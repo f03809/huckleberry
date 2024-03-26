@@ -41,6 +41,7 @@ light:
     blue: output_blue
     cold_white: output_cold
     warm_white: output_warm
+    restore_mode: RESTORE_AND_ON
 
 remote_receiver:
   pin:
