@@ -29,6 +29,7 @@ sensor:
     pin: ADC3
     id: "ADC3"
     name: "Battery Voltage"
+    internal: true
     
   - platform: template
     name: "Battery Level"
