@@ -26,8 +26,8 @@ sensor:
   #     return ((id(VCC).state /3.30) * 100.00);
 
   - platform: adc
-    pin: VCC
-    id: "VCC"
+    pin: ADC3
+    id: "ADC3"
     internal: true
     
   - platform: template
@@ -35,7 +35,7 @@ sensor:
     unit_of_measurement: '%'
     update_interval: 5s
     lambda: |-
-      return ((id(VCC).state /3.30) * 100.00);
+      return ((id(ADC3).state /3.30) * 100.00);
 
 binary_sensor:
   - platform: gpio
