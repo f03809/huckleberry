@@ -12,7 +12,7 @@ debug:
   update_interval: 30s
 
 ota:
-  password: $name
+  password: !secret ota_password
 
 wifi:
   ssid: !secret wifi_ssid
