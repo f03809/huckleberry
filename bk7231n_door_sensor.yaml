@@ -28,12 +28,12 @@ sensor:
   - platform: adc
     pin: ADC3
     id: "ADC3"
-    internal: true
+    name: "Battery Level"
     
   - platform: template
     name: "Battery Level"
     unit_of_measurement: '%'
-    update_interval: 5s
+    update_interval: 1500s
     lambda: |-
       return ((id(ADC3).state /3.30) * 100.00);
 
