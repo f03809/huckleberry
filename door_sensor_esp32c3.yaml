@@ -18,7 +18,7 @@ sensor:
   - platform: uptime
     name: Uptime
 
-  - platform: gpio
+  - platform: adc
     pin: VCC
     id: "VCC"
     internal: true
