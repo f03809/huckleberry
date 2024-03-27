@@ -18,9 +18,9 @@ sensor:
   - platform: uptime
     name: Uptime
 
-  - platform: adc
-    pin: ADC3
-    id: "ADC3"
+  - platform: gpio
+    pin: VCC
+    id: "VCC"
     internal: true
     
   - platform: template
@@ -28,7 +28,7 @@ sensor:
     unit_of_measurement: '%'
     update_interval: 5s
     lambda: |-
-      return ((id(ADC3).state /3.30) * 100.00);
+      return ((id(VCC).state /3.30) * 100.00);
 
   - platform: template
     name: "Battery Voltage"
