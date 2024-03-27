@@ -7,11 +7,12 @@ captive_portal:
 mdns:
 
 api:
-  # encryption:
-  #   key: !secret api_key
+
+debug:
+  update_interval: 30s
 
 ota:
-  password: !secret ota_password
+  password: $name
 
 wifi:
   ssid: !secret wifi_ssid
@@ -31,6 +32,9 @@ button:
     name: Restart
 
 text_sensor:
+  - platform: debug
+      reset_reason:
+        name: Reset Reason
   - platform: wifi_info
     ip_address:
       name: IP Address
