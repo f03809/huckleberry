@@ -38,6 +38,15 @@ sensor:
     lambda: |-
       return ((id(ADC3).state /3.30) * 100.00);
 
+  platform: template
+    name: "Battery Voltage"
+    unit_of_measurement: 'v'
+    update_interval: 1500s
+    lambda: |-
+      return id(ADC3).state;
+
+
+
 binary_sensor:
   - platform: gpio
     pin:
