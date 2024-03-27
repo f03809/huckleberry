@@ -6,8 +6,8 @@ esp32:
   board: esp32dev
   variant: esp32c3
   
-debug:
-  update_interval: 30s
+# debug:
+#   update_interval: 30s
 
 # text_sensor:
 #   - platform: debug
