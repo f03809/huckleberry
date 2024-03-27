@@ -33,14 +33,14 @@ sensor:
   - platform: template
     name: "Battery Level"
     unit_of_measurement: '%'
-    update_interval: 1500s
+    update_interval: 5s
     lambda: |-
       return ((id(ADC3).state /3.30) * 100.00);
 
   - platform: template
     name: "Battery Voltage"
     unit_of_measurement: 'v'
-    update_interval: 1500s
+    update_interval: 5s
     lambda: |-
       return id(ADC3).state;
 
