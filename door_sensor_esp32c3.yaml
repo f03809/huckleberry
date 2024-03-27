@@ -9,10 +9,10 @@ esp32:
 debug:
   update_interval: 30s
 
-text_sensor:
-  - platform: debug
-    reset_reason:
-      name: Reset Reason
+# text_sensor:
+#   - platform: debug
+#     reset_reason:
+#       name: Reset Reason
   
 sensor:
   - platform: uptime
