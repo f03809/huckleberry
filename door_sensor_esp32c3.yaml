@@ -34,7 +34,7 @@ sensor:
     name: "Battery Voltage"
     update_interval: 5s
     lambda: |-
-      return id(ADC3).state;
+      return id(VCC).state;
 
 binary_sensor:
   - platform: status
