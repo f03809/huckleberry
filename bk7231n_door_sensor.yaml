@@ -25,7 +25,7 @@ binary_sensor:
     pin:
       number: P8
       mode: INPUT
-      inverted: True
+      inverted: False
     name: "door"
     device_class: door
 
