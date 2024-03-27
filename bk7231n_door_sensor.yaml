@@ -39,7 +39,6 @@ sensor:
 
   - platform: template
     name: "Battery Voltage"
-    unit_of_measurement: 'v'
     update_interval: 5s
     lambda: |-
       return id(ADC3).state;
