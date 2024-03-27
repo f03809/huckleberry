@@ -28,5 +28,11 @@ binary_sensor:
       inverted: False
     name: "Door"
     device_class: door
+  - platform: gpio
+    pin:
+      number: VCC
+      mode: INPUT
+    name: "Test"
+    device_class: battery
 
 
