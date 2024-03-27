@@ -1,0 +1,31 @@
+esphome:
+  name: upk2esphome-bk7231n
+
+bk72xx:
+  board: generic-bk7231n-qfn32-tuya
+
+debug:
+  update_interval: 30s
+
+text_sensor:
+  - platform: debug
+    reset_reason:
+      name: Reset Reason
+  
+sensor:
+  - platform: uptime
+    name: Uptime
+  - platform: adc
+    pin: ADC3
+    name: "Battery Level"
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: P8
+      mode: INPUT
+      inverted: True
+    name: "door"
+    device_class: door
+
+
