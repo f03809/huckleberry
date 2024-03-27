@@ -19,7 +19,7 @@ sensor:
     name: Uptime
 
   - platform: adc
-    pin: 34
+    pin: VCC
     id: "VCC"
     internal: true
     
