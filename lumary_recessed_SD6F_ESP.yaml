@@ -12,19 +12,19 @@ esp8266:
 output:
   - platform: esp8266_pwm
     id: output_red
-    pin: GPIO5
+    pin: GPIO12
   - platform: esp8266_pwm
     id: output_green
-    pin: GPIO4
+    pin: GPIO14
   - platform: esp8266_pwm
     id: output_blue
-    pin: GPIO3
+    pin: GPIO5
   - platform: esp8266_pwm
     id: output_cold
-    pin: GPIO7
+    pin: GPIO13
   - platform: esp8266_pwm
     id: output_warm
-    pin: GPIO6
+    pin: GPIO4
 
 light:
   - platform: rgbww
