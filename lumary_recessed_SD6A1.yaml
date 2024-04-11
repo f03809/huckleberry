@@ -1,10 +1,10 @@
+substitutions:
+  default_transition_length: 2s
+  
 esphome:
   name: ${name}
   name_add_mac_suffix: false
   friendly_name: ${friendly_name}
-  on_boot:
-    then:
-      - light.turn_on: light_rgbww
 
 bk72xx:
   board: generic-bk7231n-qfn32-tuya
@@ -38,3 +38,5 @@ light:
     blue: output_blue
     cold_white: output_cold
     warm_white: output_warm
+    default_transition_length: $default_transition_length
+    restore_mode: RESTORE_DEFAULT_ON
