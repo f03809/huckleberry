@@ -1,0 +1,45 @@
+substitutions:
+  default_transition_length: 2s
+  
+esphome:
+  name: ${name}
+  name_add_mac_suffix: false
+  friendly_name: ${friendly_name}
+
+esp32:
+  variant: ESP32C3
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+
+output:
+  - platform: esp8266_pwm
+    id: output_red
+    pin: GPIO5
+  - platform: esp8266_pwm
+    id: output_green
+    pin: GPIO4
+  - platform: esp8266_pwm
+    id: output_blue
+    pin: GPIO3
+  - platform: esp8266_pwm
+    id: output_cold
+    pin: GPIO7
+  - platform: esp8266_pwm
+    id: output_warm
+    pin: GPIO6
+
+light:
+  - platform: rgbww
+    id: light_rgbww
+    name: Light
+    color_interlock: true
+    cold_white_color_temperature: 6500 K
+    warm_white_color_temperature: 2700 K
+    red: output_red
+    green: output_green
+    blue: output_blue
+    cold_white: output_cold
+    warm_white: output_warm
+    default_transition_length: $default_transition_length
+    restore_mode: RESTORE_DEFAULT_ON 

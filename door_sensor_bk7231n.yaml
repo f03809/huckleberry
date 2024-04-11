@@ -26,7 +26,7 @@ sensor:
   #     return ((id(VCC).state /3.30) * 100.00);
 
   - platform: adc
-    pin: ADC3
+    pin: ADC
     id: "ADC3"
     internal: true
     
